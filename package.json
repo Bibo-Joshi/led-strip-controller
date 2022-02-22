@@ -1,0 +1,6 @@
+{
+  "printWidth": 99,
+  "devDependencies": {
+    "prettier": "2.5.1"
+  }
+}

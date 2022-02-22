@@ -1,0 +1,50 @@
+# Make sure that
+#   * the additional_dependencies here match requirements.txt
+
+ci:
+  autoupdate_schedule: monthly
+
+repos:
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+  - repo: https://github.com/PyCQA/pylint
+    rev: v2.12.1
+    hooks:
+      - id: pylint
+        args:
+          - --rcfile=setup.cfg
+          #  run pylint across multiple cpu cores to speed it up-
+          - --jobs=0 # See https://pylint.pycqa.org/en/latest/user_guide/run.html?#parallel-execution to know more
+        additional_dependencies:
+          - fastapi~=0.75.0
+          - uvicorn[standard]~=0.17.6
+          - APScheduler~=3.9.1
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.910
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - fastapi~=0.75.0
+          - uvicorn[standard]~=0.17.6
+          - APScheduler~=3.9.1
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.29.0
+    hooks:
+      - id: pyupgrade
+        args:
+          - --py310-plus
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.5.1
+    hooks:
+      - id: prettier

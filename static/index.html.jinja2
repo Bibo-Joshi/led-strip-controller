@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>LED</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="{{ url_for('static', path='/styles/normalize.min.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/styles/style.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/styles/alarms.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/styles/lightbulbtoggle.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/styles/onoffswtich.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/styles/fixed-picker.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/iconfont/icons.css') }}" rel="stylesheet"/>
+</head>
+<body id="body">
+<div class="wrap">
+    <div class="Control">
+        <div class="ColorPicker">
+            <div class="RGBPicker"></div>
+            <br/>
+            <div class="WWPicker"></div>
+        </div>
+        <div class="StaticColorPicker">
+            <div class="power-switch">
+                <input id="power-toggle" type="checkbox"/>
+                <div class="button">
+                    <svg class="power-off">
+                        <use class="line" xlink:href="#line"/>
+                        <use class="circle" xlink:href="#circle"/>
+                    </svg>
+                    <svg class="power-on">
+                        <use class="line" xlink:href="#line"/>
+                        <use class="circle" xlink:href="#circle"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- SVG -->
+            <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
+                <symbol
+                        id="line"
+                        viewBox="0 0 150 150"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <line x1="75" x2="75" y1="34" y2="58"/>
+                </symbol>
+                <symbol
+                        id="circle"
+                        viewBox="0 0 150 150"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <circle cx="75" cy="80" r="35"/>
+                </symbol>
+            </svg>
+
+            <div
+                    style="
+              display: grid;
+              place-items: center;
+              margin-top: 3rem;
+              margin-bottom: 3rem;
+            "
+            >
+                <form class="cp" name="static-picker" , id="static-picker">
+                    <label class="cp__color cp__color--brown">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Brown"
+                                type="radio"
+                                value="brown"
+                        />
+                        <span class="cp__sr-only">Brown</span>
+                    </label>
+                    <label class="cp__color cp__color--red">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Red"
+                                type="radio"
+                                value="red"
+                        /><span class="cp__sr-only">Red</span>
+                    </label>
+                    <label class="cp__color cp__color--orange">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Orange"
+                                type="radio"
+                                value="orange"
+                        /><span class="cp__sr-only">Orange</span>
+                    </label>
+                    <label class="cp__color cp__color--yellow">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Yellow"
+                                type="radio"
+                                value="yellow"
+                        /><span class="cp__sr-only">Yellow</span>
+                    </label>
+                    <label class="cp__color cp__color--green">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Green"
+                                type="radio"
+                                value="green"
+                        /><span class="cp__sr-only">Green</span>
+                    </label>
+                    <label class="cp__color cp__color--lime">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Lime"
+                                type="radio"
+                                value="lime"
+                        /><span class="cp__sr-only">Lime</span>
+                    </label>
+                    <label class="cp__color cp__color--cyan">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Cyan"
+                                type="radio"
+                                value="cyan"
+                        /><span class="cp__sr-only">Cyan</span>
+                    </label>
+                    <label class="cp__color cp__color--lightblue">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Light Blue"
+                                type="radio"
+                                value="lightblue"
+                        /><span class="cp__sr-only">Light Blue</span>
+                    </label>
+                    <label class="cp__color cp__color--blue">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Blue"
+                                type="radio"
+                                value="blue"
+                        /><span class="cp__sr-only">Blue</span>
+                    </label>
+                    <label class="cp__color cp__color--purple">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Purple"
+                                type="radio"
+                                value="purple"
+                        /><span class="cp__sr-only">Purple</span>
+                    </label>
+                    <label class="cp__color cp__color--magenta">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Magenta"
+                                type="radio"
+                                value="magenta"
+                        /><span class="cp__sr-only">Magenta</span>
+                    </label>
+                    <label class="cp__color cp__color--pink">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Pink"
+                                type="radio"
+                                value="pink"
+                        /><span class="cp__sr-only">Pink</span>
+                    </label>
+                    <label class="cp__color cp__color--black">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Black"
+                                type="radio"
+                                value="black"
+                        /><span class="cp__sr-only">Black</span>
+                    </label>
+                    <label class="cp__color cp__color--gray">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Gray"
+                                type="radio"
+                                value="gray"
+                        /><span class="cp__sr-only">Gray</span>
+                    </label>
+                    <label class="cp__color cp__color--lightgray">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="Light Gray"
+                                type="radio"
+                                value="lightgray"
+                        /><span class="cp__sr-only">Light Gray</span>
+                    </label>
+                    <label class="cp__color cp__color--white">
+                        <input
+                                class="cp__color-input"
+                                name="color"
+                                title="White"
+                                type="radio"
+                                value="white"
+                        /><span class="cp__sr-only">White</span>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="Alarms">
+        {% for alarm in alarms.values() %}
+            <input type="checkbox" class="active-checkbox"
+                   id="{{ alarm.uid }}-active" {{ "checked" if alarm.active }}/>
+            <div class="Alarm" id="{{ alarm.uid }}" name="alarm">
+                <div class="Alarm__times">
+                    <div class="Alarm__start">
+                        <i class="mi-sunrise-1"></i>
+                        <span class="no-select"
+                              id="{{ alarm.uid }}-start">{{ alarm.effect.start|time_format }}</span>
+                    </div>
+                    <div class="Alarm__end">
+                        <i class="mi-sun"></i>
+                        <span class="no-select"
+                              id="{{ alarm.uid }}-end">{{ alarm.effect.end|time_format }}</span>
+                    </div>
+                    <div class="Alarm__off">
+                        <i class="mi-sunset"></i>
+                        <span class="no-select"
+                              id="{{ alarm.uid }}-off">{{ alarm.effect.off|time_format }}</span>
+                    </div>
+                </div>
+                <div class="Alarm__second_row">
+                    <div class="Alarm__weekdays">
+                        {% for day in [1, 2, 3, 4, 5, 6, 0] %}
+                            <div class="Alarm__day">
+                                <input type="checkbox" value="None"
+                                       id="{{ alarm.uid }}-{{ day }}" {{ "checked" if day in alarm.weekdays }}/>
+                                <label class="Alarm__day__label"
+                                       for="{{ alarm.uid }}-{{ day }}">{{ day|weekday_format }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <label class="lb-toggle" for="{{ alarm.uid }}-active"></label>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+<script src="{{ url_for('static', path='./scripts/iro.min.js') }}"></script>
+<script src="{{ url_for('static', path='./scripts/commons.js') }}"></script>
+<script src="{{ url_for('static', path='./scripts/script.js') }}"></script>
+<script src="{{ url_for('static', path='./scripts/alarms.js') }}"></script>
+<script src="{{ url_for('static', path='./scripts/websocket-listen.js') }}"></script>
+</html>

@@ -1,0 +1,7 @@
+/.idea/
+
+foo.py
+/venv/
+/node_modules/
+*.pickle
+*.log
