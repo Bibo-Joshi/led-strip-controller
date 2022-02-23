@@ -30,8 +30,29 @@ const hexInput = document.getElementById("hexInput");
 const baseUrl = window.location.protocol + '//' + window.location.host
 const apiUrl = baseUrl + '/api';
 const wsUrl = 'ws://' + window.location.host + '/ws';
-const RGBWebSocket = new WebSocket(wsUrl + '/rgb')
-const WWWebSocket = new WebSocket(wsUrl + '/white')
+const RGBWebSocket = new WebSocket(wsUrl + '/rgb');
+const WWWebSocket = new WebSocket(wsUrl + '/white');
+const StatusWebSocket = new WebSocket(wsUrl + '/status');
+const powerToggle = document.getElementById('power-toggle');
+
+fetch(apiUrl + '/status',
+    {
+        headers: {"Content-Type": "application/json"},
+        method: "GET"
+    }).then((response) => {
+    if (response.ok) {
+        return response.json()
+    } else {
+        console.log('Could not get current color: ' + response.statusText)
+    }
+}).then((json) => {
+    console.log('got status', json);
+    powerToggle.checked = json;
+});
+powerToggle.addEventListener("click", function () {
+    console.log(this.checked);
+    StatusWebSocket.send(JSON.stringify({status: this.checked}));
+})
 
 function current_rgb_color(colorPicker) {
     fetch(apiUrl + '/color',
@@ -49,7 +70,6 @@ function current_rgb_color(colorPicker) {
         colorPicker.green = json['green'];
         colorPicker.blue = json['blue'];
     })
-
 }
 
 function current_white_color(colorPicker) {
@@ -66,14 +86,12 @@ function current_white_color(colorPicker) {
     }).then((json) => {
         colorPicker.value = json['white'];
     })
-
 }
 
 RGBPicker.on("color:init", current_rgb_color);
 WWPicker.on("color:init", current_white_color);
 
-// https://iro.js.org/guide.html#color-picker-events
-RGBPicker.on(["color:init", "input:change"], function (color) {
+RGBPicker.on(["color:init", "color:change"], function (color) {
     // Show the current color in different formats
     // Using the selected color: https://iro.js.org/guide.html#selected-color-api
     values.innerHTML = [
@@ -110,6 +128,11 @@ WWWebSocket.onmessage = function (event) {
     WWPicker.color.value = jsonData.white;
 }
 
+StatusWebSocket.onmessage = function (event) {
+    const jsonData = JSON.parse(event.data);
+    powerToggle.checked = jsonData.status;
+}
+
 RGBWebSocket.onclose = function (event) {
     alert('Lost connection to server. Please reload the page.')
 }
@@ -120,6 +143,12 @@ WWWebSocket.onclose = function (event) {
     alert('Lost connection to server. Please reload the page.')
 }
 WWWebSocket.onerror = function (event) {
+    alert('Error in connection to server. Please reload the page.')
+}
+StatusWebSocket.onclose = function (event) {
+    alert('Lost connection to server. Please reload the page.')
+}
+StatusWebSocket.onerror = function (event) {
     alert('Error in connection to server. Please reload the page.')
 }
 

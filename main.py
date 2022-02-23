@@ -45,27 +45,49 @@ class Color(RGBColor):
     white: int = Field(..., ge=0, le=100)
 
 
+APP = FastAPI()
+RGB_MANAGER = WebSocketManager()
+WHITE_MANAGER = WebSocketManager()
+STATUS_MANAGER = WebSocketManager()
+
+
 class Data:
     def __init__(self):
         self.color = Color(red=0, green=0, blue=0, white=0)
+        self.on: bool = False
 
     def get_color(self) -> Color:
         return self.color
 
+    def get_status(self) -> bool:
+        return self.on
+
     def __call__(self) -> "Data":
         return self
 
+    async def toggle_on_off(self, websocket: WebSocket):
+        await STATUS_MANAGER.connect(websocket)
+        try:
+            while True:
+                self.on = (await websocket.receive_json())['status']
+
+                await STATUS_MANAGER.broadcast_json({'status': self.on}, exclude=websocket)
+        except WebSocketDisconnect:
+            STATUS_MANAGER.disconnect(websocket)
+
 
 DATA = Data()
-APP = FastAPI()
-RGB_MANAGER = WebSocketManager()
-WHITE_MANAGER = WebSocketManager()
+APP.add_api_websocket_route('/ws/status', DATA.toggle_on_off)
 
 
 @APP.get("/api/color", response_model=Color)
 async def get_color(color: Color = Depends(DATA.get_color)):
-    # return HTT
     return color
+
+
+@APP.get("/api/status", response_model=bool)
+async def get_status(on: bool = Depends(DATA.get_status)):
+    return on
 
 
 @APP.put("/api/updateRGB")

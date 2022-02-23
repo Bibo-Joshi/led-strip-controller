@@ -7,6 +7,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
           rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
+    <link href="./onoffswtich.css" rel="stylesheet">
 
 </head>
 <body>
@@ -17,17 +18,41 @@
         <div class="WWPicker"></div>
     </div>
     <div class="half readout">
-        <p>
-            iro.js is an HSV color picker widget for JavaScript with a modern SVG-based user
-            interface -- and no jQuery or extra CSS / images.
-        </p>
-        <span class="title link">Head to <a href="https://iro.js.org?ref=codepen" target="blank">iro.js.org</a> for full documentation and features, or check out the source code on <a
-                href="https://github.com/jaames/iro.js" target="blank">GitHub</a>!
-        </span>
-        <span class="title">Selected Color:</span>
-        <div id="values"></div>
-        <label for="hexInput"></label><input id="hexInput"/>
+        <div class="power-switch">
+        <input type="checkbox" id="power-toggle"/>
+        <div class="button">
+            <svg class="power-off">
+                <use class="line" xlink:href="#line"/>
+                <use class="circle" xlink:href="#circle"/>
+            </svg>
+            <svg class="power-on">
+                <use class="line" xlink:href="#line"/>
+                <use class="circle" xlink:href="#circle"/>
+            </svg>
+        </div>
     </div>
+
+    <!-- SVG -->
+    <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="line" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <line x1="75" x2="75" y1="34" y2="58"/>
+        </symbol>
+        <symbol id="circle" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="75" cy="80" r="35"/>
+        </symbol>
+    </svg>
+
+    <p>
+        iro.js is an HSV color picker widget for JavaScript with a modern SVG-based user
+        interface -- and no jQuery or extra CSS / images.
+    </p>
+    <span class="title link">Head to <a href="https://iro.js.org?ref=codepen" target="blank">iro.js.org</a> for full documentation and features, or check out the source code on <a
+            href="https://github.com/jaames/iro.js" target="blank">GitHub</a>!
+        </span>
+    <span class="title">Selected Color:</span>
+    <div id="values"></div>
+    <label for="hexInput"></label><input id="hexInput"/>
+</div>
 </div>
 </body>
 <script src='./iro.min.js'></script>
