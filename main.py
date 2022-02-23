@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from typing import Set, Any
 
@@ -20,9 +21,13 @@ class WebSocketManager:
         self.active_connections.discard(websocket)
 
     async def broadcast_json(self, json: Any, exclude: WebSocket = None):
-        for connection in self.active_connections:
-            if connection is not exclude:
-                await connection.send_json(json)
+        await asyncio.gather(
+            *(
+                connection.send_json(json)
+                for connection in self.active_connections
+                if connection is not exclude
+            )
+        )
 
 
 class RGBColor(BaseModel):

@@ -85,9 +85,13 @@ RGBPicker.on(["color:init", "input:change"], function (color) {
 });
 
 RGBPicker.on('input:change', function (color) {
+    if (RGBWebSocket.readyState !== WebSocket.OPEN) {
+        alert('No connection to server. Color change will not propagate.');
+        return;
+    }
     RGBWebSocket.send(JSON.stringify({red: color.red, green: color.green, blue: color.blue}));
 });
-RGBWebSocket.onmessage =  function(event) {
+RGBWebSocket.onmessage = function (event) {
     const jsonData = JSON.parse(event.data);
     RGBPicker.color.red = jsonData.red;
     RGBPicker.color.green = jsonData.green;
@@ -95,11 +99,28 @@ RGBWebSocket.onmessage =  function(event) {
 }
 
 WWPicker.on('input:change', function (color) {
+    if (RGBWebSocket.readyState !== WebSocket.OPEN) {
+        alert('No connection to server. Color change will not propagate.');
+        return;
+    }
     WWWebSocket.send(JSON.stringify({white: color.value}));
 });
-WWWebSocket.onmessage =  function(event) {
+WWWebSocket.onmessage = function (event) {
     const jsonData = JSON.parse(event.data);
     WWPicker.color.value = jsonData.white;
+}
+
+RGBWebSocket.onclose = function (event) {
+    alert('Lost connection to server. Please reload the page.')
+}
+RGBWebSocket.onerror = function (event) {
+    alert('Error in connection to server. Please reload the page.')
+}
+WWWebSocket.onclose = function (event) {
+    alert('Lost connection to server. Please reload the page.')
+}
+WWWebSocket.onerror = function (event) {
+    alert('Error in connection to server. Please reload the page.')
 }
 
 hexInput.addEventListener('change', function () {
