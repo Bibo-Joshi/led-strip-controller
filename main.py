@@ -46,48 +46,35 @@ class Color(RGBColor):
 
 
 APP = FastAPI()
-RGB_MANAGER = WebSocketManager()
-WHITE_MANAGER = WebSocketManager()
-STATUS_MANAGER = WebSocketManager()
+MANAGER = WebSocketManager()
 
 
 class Data:
     def __init__(self):
         self.color = Color(red=0, green=0, blue=0, white=0)
-        self.on: bool = False
+        self.status: bool = False
 
     def get_color(self) -> Color:
         return self.color
 
     def get_status(self) -> bool:
-        return self.on
+        return self.status
 
     def __call__(self) -> "Data":
         return self
 
-    async def toggle_on_off(self, websocket: WebSocket):
-        await STATUS_MANAGER.connect(websocket)
-        try:
-            while True:
-                self.on = (await websocket.receive_json())['status']
-
-                await STATUS_MANAGER.broadcast_json({'status': self.on}, exclude=websocket)
-        except WebSocketDisconnect:
-            STATUS_MANAGER.disconnect(websocket)
-
 
 DATA = Data()
-APP.add_api_websocket_route('/ws/status', DATA.toggle_on_off)
 
 
 @APP.get("/api/color", response_model=Color)
-async def get_color(color: Color = Depends(DATA.get_color)):
-    return color
+async def get_color(data: Data = Depends(DATA)):
+    return data.color
 
 
 @APP.get("/api/status", response_model=bool)
-async def get_status(on: bool = Depends(DATA.get_status)):
-    return on
+async def get_status(data: Data = Depends(DATA)):
+    return data.status
 
 
 @APP.put("/api/updateRGB")
@@ -102,39 +89,33 @@ async def update_white(
     data.color.white = white
 
 
-@APP.websocket("/ws/rgb")
-async def rgb_websocket(websocket: WebSocket, data: Data = Depends(DATA)):
-    await RGB_MANAGER.connect(websocket)
-    try:
-        while True:
-            try:
-                json_data = await websocket.receive_json()
-                new_rgb = RGBColor(**json_data)
-            except ValidationError:
-                # TODO: Logging
-                continue
-
-            data.color.update_rgb(new_rgb)
-            await RGB_MANAGER.broadcast_json(new_rgb.dict(), exclude=websocket)
-    except WebSocketDisconnect:
-        RGB_MANAGER.disconnect(websocket)
-
-
-@APP.websocket("/ws/white")
-async def white_websocket(websocket: WebSocket, data: Data = Depends(DATA)):
-    await WHITE_MANAGER.connect(websocket)
+@APP.websocket("/ws")
+async def websocket(websocket: WebSocket, data: Data = Depends(DATA)):
+    await MANAGER.connect(websocket)
     try:
         while True:
             json_data = await websocket.receive_json()
-            new_white = int(json_data["white"])
-            if not 0 <= new_white <= 100:
-                # TODO: logging
-                continue
+            if rgb_data := json_data.get('updateRGB'):
+                try:
+                    new_rgb = RGBColor(**rgb_data)
+                except ValidationError:
+                    # TODO: Logging
+                    continue
 
-            data.color.white = new_white
-            await WHITE_MANAGER.broadcast_json(json_data, exclude=websocket)
+                data.color.update_rgb(new_rgb)
+            elif white := json_data.get('updateWhite'):
+                new_white = int(white)
+                if not 0 <= new_white <= 100:
+                    # TODO: logging
+                    continue
+
+                data.color.white = new_white
+            elif status := json_data.get('updateStatus'):
+                data.on = status
+
+            await MANAGER.broadcast_json(json_data, exclude=websocket)
     except WebSocketDisconnect:
-        WHITE_MANAGER.disconnect(websocket)
+        MANAGER.disconnect(websocket)
 
 
 # Order matters!

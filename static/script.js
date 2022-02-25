@@ -1,10 +1,15 @@
-// Create a new color picker instance
-// https://iro.js.org/guide.html#getting-started
-var RGBPicker = new iro.ColorPicker(".RGBPicker", {
+const values = document.getElementById("values");
+const hexInput = document.getElementById("hexInput");
+const baseUrl = window.location.protocol + '//' + window.location.host
+const apiUrl = baseUrl + '/api';
+const WSocket = new WebSocket('ws://' + window.location.host + '/ws');
+const powerToggle = document.getElementById('power-toggle');
+
+const RGBPicker = new iro.ColorPicker(".RGBPicker", {
     // color picker options
     // Option guide: https://iro.js.org/guide.html#color-picker-options
     width: 280,
-    color: "rgb(255, 0, 0)",
+    color: "rgb(0,0,0)",
     borderWidth: 1,
     borderColor: "#fff",
 });
@@ -24,17 +29,6 @@ const WWPicker = new iro.ColorPicker(".WWPicker", {
     ]
 });
 
-
-const values = document.getElementById("values");
-const hexInput = document.getElementById("hexInput");
-const baseUrl = window.location.protocol + '//' + window.location.host
-const apiUrl = baseUrl + '/api';
-const wsUrl = 'ws://' + window.location.host + '/ws';
-const RGBWebSocket = new WebSocket(wsUrl + '/rgb');
-const WWWebSocket = new WebSocket(wsUrl + '/white');
-const StatusWebSocket = new WebSocket(wsUrl + '/status');
-const powerToggle = document.getElementById('power-toggle');
-
 fetch(apiUrl + '/status',
     {
         headers: {"Content-Type": "application/json"},
@@ -46,12 +40,11 @@ fetch(apiUrl + '/status',
         console.log('Could not get current color: ' + response.statusText)
     }
 }).then((json) => {
-    console.log('got status', json);
     powerToggle.checked = json;
 });
 powerToggle.addEventListener("click", function () {
     console.log(this.checked);
-    StatusWebSocket.send(JSON.stringify({status: this.checked}));
+    WSocket.send(JSON.stringify({updateStatus: this.checked}));
 })
 
 function current_rgb_color(colorPicker) {
@@ -103,52 +96,38 @@ RGBPicker.on(["color:init", "color:change"], function (color) {
 });
 
 RGBPicker.on('input:change', function (color) {
-    if (RGBWebSocket.readyState !== WebSocket.OPEN) {
+    if (WSocket.readyState !== WSocket.OPEN) {
         alert('No connection to server. Color change will not propagate.');
         return;
     }
-    RGBWebSocket.send(JSON.stringify({red: color.red, green: color.green, blue: color.blue}));
+    WSocket.send(JSON.stringify({updateRGB: {red: color.red, green: color.green, blue: color.blue}}));
 });
-RGBWebSocket.onmessage = function (event) {
-    const jsonData = JSON.parse(event.data);
-    RGBPicker.color.red = jsonData.red;
-    RGBPicker.color.green = jsonData.green;
-    RGBPicker.color.blue = jsonData.blue;
-}
-
 WWPicker.on('input:change', function (color) {
-    if (RGBWebSocket.readyState !== WebSocket.OPEN) {
+    if (WSocket.readyState !== WSocket.OPEN) {
         alert('No connection to server. Color change will not propagate.');
         return;
     }
-    WWWebSocket.send(JSON.stringify({white: color.value}));
+    WSocket.send(JSON.stringify({updateWhite: color.value}));
 });
-WWWebSocket.onmessage = function (event) {
-    const jsonData = JSON.parse(event.data);
-    WWPicker.color.value = jsonData.white;
-}
 
-StatusWebSocket.onmessage = function (event) {
+WSocket.onmessage = function (event) {
     const jsonData = JSON.parse(event.data);
-    powerToggle.checked = jsonData.status;
+    if (jsonData.updateRGB !== undefined) {
+        RGBPicker.color.red = jsonData.updateRGB.red;
+        RGBPicker.color.green = jsonData.updateRGB.green;
+        RGBPicker.color.blue = jsonData.updateRGB.blue;
+    } else if (jsonData.updateWhite !== undefined) {
+        WWPicker.color.value = jsonData.updateWhite;
+    } else if (jsonData.updateStatus !== undefined) {
+        powerToggle.checked = jsonData.updateStatus;
+    }
 }
-
-RGBWebSocket.onclose = function (event) {
+WSocket.onclose = function (event) {
+    console.log(event.toString());
     alert('Lost connection to server. Please reload the page.')
 }
-RGBWebSocket.onerror = function (event) {
-    alert('Error in connection to server. Please reload the page.')
-}
-WWWebSocket.onclose = function (event) {
-    alert('Lost connection to server. Please reload the page.')
-}
-WWWebSocket.onerror = function (event) {
-    alert('Error in connection to server. Please reload the page.')
-}
-StatusWebSocket.onclose = function (event) {
-    alert('Lost connection to server. Please reload the page.')
-}
-StatusWebSocket.onerror = function (event) {
+WSocket.onerror = function (event) {
+    console.log(event.toString());
     alert('Error in connection to server. Please reload the page.')
 }
 
