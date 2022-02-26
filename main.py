@@ -110,8 +110,8 @@ async def websocket(websocket: WebSocket, data: Data = Depends(DATA)):
                     continue
 
                 data.color.white = new_white
-            elif status := json_data.get('updateStatus'):
-                data.on = status
+            elif (status := json_data.get('updateStatus')) is not None:
+                data.status = status
 
             await MANAGER.broadcast_json(json_data, exclude=websocket)
     except WebSocketDisconnect:

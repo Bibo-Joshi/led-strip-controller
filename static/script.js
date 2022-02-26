@@ -71,7 +71,6 @@ fetch(apiUrl + '/status',
     powerToggle.checked = json;
 });
 powerToggle.addEventListener("click", function () {
-    console.log(this.checked);
     WSocket.send(JSON.stringify({updateStatus: this.checked}));
 })
 
