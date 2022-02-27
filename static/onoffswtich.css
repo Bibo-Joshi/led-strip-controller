@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: var(--width);
+    /*width: var(--width);*/
     height: var(--height);
 }
 
