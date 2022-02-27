@@ -1,0 +1,76 @@
+//Copyright (c) 2022 by Jon Kantner (https://codepen.io/jkantner/pen/xxXmVKw)
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+//Adjust colors as needed and convert to CSS via e.g. https://bfotool.com/sass-to-css
+
+$hue: 223
+$colors: ("brown": hsl(23, 90%, 25%), "red": hsl(3, 90%, 55%), "orange": hsl(33, 90%, 55%), "yellow": hsl(53, 90%, 55%), "green": hsl(78, 90%, 30%), "lime": hsl(88, 90%, 55%), "cyan": hsl(183, 90%, 55%), "lightblue": hsl(198, 90%, 55%), "blue": hsl(223, 90%, 55%), "purple": hsl(273, 90%, 45%), "magenta": hsl(303, 90%, 55%), "pink": hsl(343, 90%, 75%), "black": hsl(0, 0%, 10%), "gray": hsl(0, 0%, 30%), "lightgray": hsl(0, 0%, 60%), "white": hsl(0, 0%, 90%))
+
+.cp
+  background: linear-gradient(90deg, #{hsl($hue,10%,20%)}, #{hsl($hue,10%,40%)})
+  box-shadow: 0.1em 0.1em 0 #{hsl($hue,10%,50%)}, 0.25em 0.25em 0 #{hsl($hue,10%,20%)}, 0.375em 0.375em 0.375em #{hsla($hue,0%,0%,0.6)}
+  border-radius: 2em
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  grid-template-rows: repeat(4, 1fr)
+  width: 16em
+  height: 16em
+  transform: rotateX(45deg) rotateZ(45deg)
+
+  &__color
+    padding: 0.5em
+    -webkit-tap-highlight-color: transparent
+
+    &,
+    &-input
+      display: block
+
+    &-input
+      border-radius: 50%
+      position: relative
+      width: 3em
+      height: 3em
+      transform: translate3d(-0.5em, -0.5em, 0)
+        style: preserve-3d
+      transition: transform 0.15s linear
+      -webkit-appearance: none
+      appearance: none
+
+      &:after
+        border-radius: inherit
+        content: ""
+        display: block
+        position: absolute
+        inset: 0
+        transform: translate3d(0.25em, 0.25em, -1px)
+        transition: box-shadow 0.15s linear
+
+      &:checked
+        transform: translate3d(-0.25em, -0.25em, 0)
+
+      &:focus
+        outline: transparent
+
+    @each $name, $value in $colors
+      &--#{$name} &-input
+        background-image: linear-gradient(90deg, $value, lighten($value, 15%))
+
+        &:after
+          background: linear-gradient(0deg, darken($value, 10%), darken($value, 30%), darken($value, 20%))
+          box-shadow: 0.25em 0.25em 0.25em hsla(0, 0%, 0%, 0.9), 0.5em 0.5em 0.5em fade-out($value, 0.4)
+
+        &:checked
+          &:after
+            box-shadow: 0 0 0.125em hsla(0, 0%, 0%, 0.9), 0.25em 0.25em 0.25em fade-out($value, 0.4)
+
+  &__sr-only
+    clip: rect(1px, 1px, 1px, 1px)
+    overflow: hidden
+    position: absolute
+    width: 1px
+    height: 1pxem 0 #{hsl($hue,10%,20%)}, 0.375em 0.375em 0.375em #{hsla($hue,0%,0%,0.6)}
