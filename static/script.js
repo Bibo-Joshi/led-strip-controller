@@ -5,6 +5,8 @@ const apiUrl = baseUrl + '/api';
 const WSocket = new WebSocket('ws://' + window.location.host + '/ws');
 const powerToggle = document.getElementById('power-toggle');
 const backgroundElement = document.getElementById('body');
+const rgbRegex = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
+const radioButtons = document.forms["static-picker"].elements["color"];
 
 function rgbAverage(color1, color2) {
     return {
@@ -57,6 +59,23 @@ const WWPicker = new iro.ColorPicker(".WWPicker", {
     ]
 });
 
+for (const radio of radioButtons) {
+    radio.onclick = function () {
+        // It would probably be better to encode the color value in the html tag somehow but
+        // I'm in no mood to learn how to build that and this solution is better than having
+        // to adjust the html each time the colors are updated
+        WWPicker.color.value = 0;
+        const match = rgbRegex.exec(window.getComputedStyle(radio).getPropertyValue('color'));
+        console.log(parseInt(match[1]), typeof  parseInt(match[1]));
+        if (match !== null) {
+            RGBPicker.color.red = parseInt(match[1]);
+            RGBPicker.color.green = parseInt(match[2]);
+            RGBPicker.color.blue = parseInt(match[3]);
+        }
+
+    }
+}
+
 fetch(apiUrl + '/status',
     {
         headers: {"Content-Type": "application/json"},
@@ -108,6 +127,12 @@ function current_white_color(colorPicker) {
     })
 }
 
+function uncheckStaticPicker() {
+    for (const radio of radioButtons) {
+        radio.checked = false;
+    }
+}
+
 RGBPicker.on("color:init", current_rgb_color);
 WWPicker.on("color:init", current_white_color);
 
@@ -148,6 +173,7 @@ RGBPicker.on('input:change', function (color) {
             blue: color.blue
         }
     }));
+    uncheckStaticPicker();
 });
 WWPicker.on('input:change', function (color) {
     if (WSocket.readyState !== WSocket.OPEN) {
@@ -155,6 +181,7 @@ WWPicker.on('input:change', function (color) {
         return;
     }
     WSocket.send(JSON.stringify({updateWhite: color.value}));
+    uncheckStaticPicker();
 });
 
 WSocket.onmessage = function (event) {

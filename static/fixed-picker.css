@@ -9,16 +9,13 @@
     height: 16em;
     transform: rotateX(45deg) rotateZ(45deg);
 }
-
 .cp__color {
     padding: 0.5em;
     -webkit-tap-highlight-color: transparent;
 }
-
 .cp__color, .cp__color-input {
     display: block;
 }
-
 .cp__color-input {
     border-radius: 50%;
     position: relative;
@@ -30,7 +27,6 @@
     -webkit-appearance: none;
     appearance: none;
 }
-
 .cp__color-input:after {
     border-radius: inherit;
     content: "";
@@ -40,223 +36,188 @@
     transform: translate3d(0.25em, 0.25em, -1px);
     transition: box-shadow 0.15s linear;
 }
-
 .cp__color-input:checked {
     transform: translate3d(-0.25em, -0.25em, 0);
 }
-
 .cp__color-input:focus {
     outline: transparent;
 }
-
 .cp__color--brown .cp__color-input {
+    color: #793206;
     background-image: linear-gradient(90deg, #793206, #c2510a);
 }
-
 .cp__color--brown .cp__color-input:after {
     background: linear-gradient(0deg, #491e04, black, #180a01);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(121, 50, 6, 0.6);
 }
-
 .cp__color--brown .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(121, 50, 6, 0.6);
 }
-
 .cp__color--red .cp__color-input {
+    color: #f42f25;
     background-image: linear-gradient(90deg, #f42f25, #f7756e);
 }
-
 .cp__color--red .cp__color-input:after {
     background: linear-gradient(0deg, #da160b, #790c06, #aa1109);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(244, 47, 37, 0.6);
 }
-
 .cp__color--red .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(244, 47, 37, 0.6);
 }
-
 .cp__color--orange .cp__color-input {
+    color: #f49725;
     background-image: linear-gradient(90deg, #f49725, #f7b96e);
 }
-
 .cp__color--orange .cp__color-input:after {
     background: linear-gradient(0deg, #da7d0b, #794506, #aa6109);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(244, 151, 37, 0.6);
 }
-
 .cp__color--orange .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(244, 151, 37, 0.6);
 }
-
 .cp__color--yellow .cp__color-input {
+    color: #f4db25;
     background-image: linear-gradient(90deg, #f4db25, #f7e76e);
 }
-
 .cp__color--yellow .cp__color-input:after {
     background: linear-gradient(0deg, #dac20b, #796c06, #aa9709);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(244, 219, 37, 0.6);
 }
-
 .cp__color--yellow .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(244, 219, 37, 0.6);
 }
-
 .cp__color--green .cp__color-input {
+    color: #689108;
     background-image: linear-gradient(90deg, #689108, #9cda0b);
 }
-
 .cp__color--green .cp__color-input:after {
     background: linear-gradient(0deg, #456105, black, #233003);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(104, 145, 8, 0.6);
 }
-
 .cp__color--green .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(104, 145, 8, 0.6);
 }
-
 .cp__color--lime .cp__color-input {
+    color: #93f425;
     background-image: linear-gradient(90deg, #93f425, #b7f76e);
 }
-
 .cp__color--lime .cp__color-input:after {
     background: linear-gradient(0deg, #7ada0b, #447906, #5faa09);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(147, 244, 37, 0.6);
 }
-
 .cp__color--lime .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(147, 244, 37, 0.6);
 }
-
 .cp__color--cyan .cp__color-input {
+    color: #25e9f4;
     background-image: linear-gradient(90deg, #25e9f4, #6ef0f7);
 }
-
 .cp__color--cyan .cp__color-input:after {
     background: linear-gradient(0deg, #0bd0da, #067379, #09a2aa);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(37, 233, 244, 0.6);
 }
-
 .cp__color--cyan .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(37, 233, 244, 0.6);
 }
-
 .cp__color--lightblue .cp__color-input {
+    color: #25b6f4;
     background-image: linear-gradient(90deg, #25b6f4, #6ecef7);
 }
-
 .cp__color--lightblue .cp__color-input:after {
     background: linear-gradient(0deg, #0b9cda, #065779, #0979aa);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(37, 182, 244, 0.6);
 }
-
 .cp__color--lightblue .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(37, 182, 244, 0.6);
 }
-
 .cp__color--blue .cp__color-input {
+    color: #255ff4;
     background-image: linear-gradient(90deg, #255ff4, #6e95f7);
 }
-
 .cp__color--blue .cp__color-input:after {
     background: linear-gradient(0deg, #0b46da, #062779, #0936aa);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(37, 95, 244, 0.6);
 }
-
 .cp__color--blue .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(37, 95, 244, 0.6);
 }
-
 .cp__color--purple .cp__color-input {
+    color: #7d0bda;
     background-image: linear-gradient(90deg, #7d0bda, #a23df5);
 }
-
 .cp__color--purple .cp__color-input:after {
     background: linear-gradient(0deg, #6109aa, #2a0449, #450679);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(125, 11, 218, 0.6);
 }
-
 .cp__color--purple .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(125, 11, 218, 0.6);
 }
-
 .cp__color--magenta .cp__color-input {
+    color: #f425e9;
     background-image: linear-gradient(90deg, #f425e9, #f76ef0);
 }
-
 .cp__color--magenta .cp__color-input:after {
     background: linear-gradient(0deg, #da0bd0, #790673, #aa09a2);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(244, 37, 233, 0.6);
 }
-
 .cp__color--magenta .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(244, 37, 233, 0.6);
 }
-
 .cp__color--pink .cp__color-input {
+    color: #f986a6;
     background-image: linear-gradient(90deg, #f986a6, #fccfdc);
 }
-
 .cp__color--pink .cp__color-input:after {
     background: linear-gradient(0deg, #f65583, #da0b46, #f4255f);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(249, 134, 166, 0.6);
 }
-
 .cp__color--pink .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(249, 134, 166, 0.6);
 }
-
 .cp__color--black .cp__color-input {
+    color: #1a1a1a;
     background-image: linear-gradient(90deg, #1a1a1a, #404040);
 }
-
 .cp__color--black .cp__color-input:after {
     background: linear-gradient(0deg, black, black, black);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(26, 26, 26, 0.6);
 }
-
 .cp__color--black .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(26, 26, 26, 0.6);
 }
-
 .cp__color--gray .cp__color-input {
+    color: #4d4d4d;
     background-image: linear-gradient(90deg, #4d4d4d, #737373);
 }
-
 .cp__color--gray .cp__color-input:after {
     background: linear-gradient(0deg, #333333, black, #1a1a1a);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(77, 77, 77, 0.6);
 }
-
 .cp__color--gray .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(77, 77, 77, 0.6);
 }
-
 .cp__color--lightgray .cp__color-input {
+    color: #999999;
     background-image: linear-gradient(90deg, #999999, #bfbfbf);
 }
-
 .cp__color--lightgray .cp__color-input:after {
     background: linear-gradient(0deg, gray, #4d4d4d, #666666);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(153, 153, 153, 0.6);
 }
-
 .cp__color--lightgray .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(153, 153, 153, 0.6);
 }
-
 .cp__color--white .cp__color-input {
+    color: #e6e6e6;
     background-image: linear-gradient(90deg, #e6e6e6, white);
 }
-
 .cp__color--white .cp__color-input:after {
     background: linear-gradient(0deg, #cccccc, #999999, #b3b3b3);
     box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.9), 0.5em 0.5em 0.5em rgba(230, 230, 230, 0.6);
 }
-
 .cp__color--white .cp__color-input:checked:after {
     box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.9), 0.25em 0.25em 0.25em rgba(230, 230, 230, 0.6);
 }
-
 .cp__sr-only {
     clip: rect(1px, 1px, 1px, 1px);
     overflow: hidden;

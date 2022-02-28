@@ -58,6 +58,7 @@ $colors: ("brown": hsl(23, 90%, 25%), "red": hsl(3, 90%, 55%), "orange": hsl(33,
 
     @each $name, $value in $colors
       &--#{$name} &-input
+        color: $value
         background-image: linear-gradient(90deg, $value, lighten($value, 15%))
 
         &:after
