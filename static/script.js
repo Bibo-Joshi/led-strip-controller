@@ -190,8 +190,10 @@ WSocket.onmessage = function (event) {
         RGBPicker.color.red = jsonData.updateRGB.red;
         RGBPicker.color.green = jsonData.updateRGB.green;
         RGBPicker.color.blue = jsonData.updateRGB.blue;
+        uncheckStaticPicker();
     } else if (jsonData.updateWhite !== undefined) {
         WWPicker.color.value = jsonData.updateWhite;
+        uncheckStaticPicker();
     } else if (jsonData.updateStatus !== undefined) {
         powerToggle.checked = jsonData.updateStatus;
     }
