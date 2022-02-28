@@ -26,7 +26,7 @@
 
 .power-switch .button:after {
     content: "";
-    width: 100%;
+    width: 50%;
     height: 100%;
     position: absolute;
     background: radial-gradient(circle closest-side, var(--color-invert), transparent);
@@ -41,7 +41,7 @@
 .power-switch .button .power-on,
 .power-switch .button .power-off {
     height: 100%;
-    width: 100%;
+    /*width: 100%;*/
     position: absolute;
     z-index: 1;
     fill: none;
