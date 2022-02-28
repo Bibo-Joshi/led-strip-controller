@@ -6,13 +6,19 @@ body {
 }
 
 .wrap {
-    margin: 2.5%;
+    margin: 5%;
     padding: 25px 25px;
     background: #0e101f;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 0 15px 5px #000000cc;
+}
+
+@media (min-width: 64em) {
+    .wrap {
+        margin: 2.5%;
+    }
 }
 
 
@@ -44,6 +50,7 @@ body {
         justify-content: flex-start;
     }
 }
+
 .Hero__intro {
     text-align: center;
     align-items: center;
