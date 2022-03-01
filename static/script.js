@@ -65,7 +65,6 @@ for (const radio of radioButtons) {
         // I'm in no mood to learn how to build that and this solution is better than having
         // to adjust the html each time the colors are updated
         const match = rgbRegex.exec(window.getComputedStyle(radio).getPropertyValue('color'));
-        console.log(parseInt(match[1]), typeof  parseInt(match[1]));
         if (match !== null) {
             RGBPicker.color.red = parseInt(match[1]);
             RGBPicker.color.green = parseInt(match[2]);

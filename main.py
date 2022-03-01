@@ -80,15 +80,13 @@ async def get_status():
 @APP.put("/api/updateRGB")
 async def update_rgb(rgb_color: RGBColor):
     DATA.color.update_rgb(rgb_color)
-    await MANAGER.broadcast_json({'updateRGB': rgb_color.dict()})
+    await MANAGER.broadcast_json({"updateRGB": rgb_color.dict()})
 
 
 @APP.put("/api/updateWhite")
-async def update_white(
-    white: int = Body(..., ge=0, le=100, embed=True)
-):
+async def update_white(white: int = Body(..., ge=0, le=100, embed=True)):
     DATA.color.white = white
-    await MANAGER.broadcast_json({'updateWhite': white})
+    await MANAGER.broadcast_json({"updateWhite": white})
 
 
 @APP.websocket("/ws")
@@ -97,7 +95,7 @@ async def websocket(websocket: WebSocket):
     try:
         while True:
             json_data = await websocket.receive_json()
-            if rgb_data := json_data.get('updateRGB'):
+            if rgb_data := json_data.get("updateRGB"):
                 try:
                     new_rgb = RGBColor(**rgb_data)
                 except ValidationError:
@@ -105,14 +103,14 @@ async def websocket(websocket: WebSocket):
                     continue
 
                 DATA.color.update_rgb(new_rgb)
-            elif white := json_data.get('updateWhite'):
+            elif white := json_data.get("updateWhite"):
                 new_white = int(white)
                 if not 0 <= new_white <= 100:
                     # TODO: logging
                     continue
 
                 DATA.color.white = new_white
-            elif (status := json_data.get('updateStatus')) is not None:
+            elif (status := json_data.get("updateStatus")) is not None:
                 DATA.status = status
 
             await MANAGER.broadcast_json(json_data, exclude=websocket)
