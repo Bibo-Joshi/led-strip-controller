@@ -64,13 +64,22 @@ for (const radio of radioButtons) {
         // It would probably be better to encode the color value in the html tag somehow but
         // I'm in no mood to learn how to build that and this solution is better than having
         // to adjust the html each time the colors are updated
-        WWPicker.color.value = 0;
         const match = rgbRegex.exec(window.getComputedStyle(radio).getPropertyValue('color'));
         console.log(parseInt(match[1]), typeof  parseInt(match[1]));
         if (match !== null) {
             RGBPicker.color.red = parseInt(match[1]);
             RGBPicker.color.green = parseInt(match[2]);
             RGBPicker.color.blue = parseInt(match[3]);
+
+            WWPicker.color.value = 0;
+            WSocket.send(JSON.stringify({updateWhite: 0}));
+            WSocket.send(JSON.stringify({
+                updateRGB: {
+                    red: RGBPicker.color.red,
+                    green: RGBPicker.color.green,
+                    blue: RGBPicker.color.blue
+                }
+            }));
         }
 
     }

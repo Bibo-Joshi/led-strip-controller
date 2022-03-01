@@ -68,29 +68,31 @@ DATA = Data()
 
 
 @APP.get("/api/color", response_model=Color)
-async def get_color(data: Data = Depends(DATA)):
-    return data.color
+async def get_color():
+    return DATA.color
 
 
 @APP.get("/api/status", response_model=bool)
-async def get_status(data: Data = Depends(DATA)):
-    return data.status
+async def get_status():
+    return DATA.status
 
 
 @APP.put("/api/updateRGB")
-async def update_rgb(rgb_color: RGBColor, data: Data = Depends(DATA)):
-    data.color.update_rgb(rgb_color)
+async def update_rgb(rgb_color: RGBColor):
+    DATA.color.update_rgb(rgb_color)
+    await MANAGER.broadcast_json({'updateRGB': rgb_color.dict()})
 
 
 @APP.put("/api/updateWhite")
 async def update_white(
-    white: int = Body(..., ge=0, le=100, embed=True), data: Data = Depends(DATA)
+    white: int = Body(..., ge=0, le=100, embed=True)
 ):
-    data.color.white = white
+    DATA.color.white = white
+    await MANAGER.broadcast_json({'updateWhite': white})
 
 
 @APP.websocket("/ws")
-async def websocket(websocket: WebSocket, data: Data = Depends(DATA)):
+async def websocket(websocket: WebSocket):
     await MANAGER.connect(websocket)
     try:
         while True:
@@ -102,16 +104,16 @@ async def websocket(websocket: WebSocket, data: Data = Depends(DATA)):
                     # TODO: Logging
                     continue
 
-                data.color.update_rgb(new_rgb)
+                DATA.color.update_rgb(new_rgb)
             elif white := json_data.get('updateWhite'):
                 new_white = int(white)
                 if not 0 <= new_white <= 100:
                     # TODO: logging
                     continue
 
-                data.color.white = new_white
+                DATA.color.white = new_white
             elif (status := json_data.get('updateStatus')) is not None:
-                data.status = status
+                DATA.status = status
 
             await MANAGER.broadcast_json(json_data, exclude=websocket)
     except WebSocketDisconnect:
