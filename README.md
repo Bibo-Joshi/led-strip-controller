@@ -1,5 +1,7 @@
 # LED-Strip Controller
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Bibo-Joshi/led-strip-controller/main.svg)](https://results.pre-commit.ci/latest/github/Bibo-Joshi/led-strip-controller/main)
+
 This repository provides a controller for RGB+Warm-White LED strips, tailored to my needs.
 Simultaneously, I used it to try out some things that I haven't worked with before (more on that below).
 
