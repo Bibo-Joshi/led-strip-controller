@@ -10,6 +10,12 @@ Simultaneously, I used it to try out some things that I haven't worked with befo
 - Allows to control either RGB or RGBWW strips.
 - Provides a restful API
 - GUI available
+  <details> <summary>Click to view demo</summary>
+
+  ![Demo](demo.mp4)
+
+  </details>
+
 - Strong focus on setting alarms to wake up with the light going on slowly
 
 ## Limitations:
@@ -57,6 +63,7 @@ This projects uses code from
 - [This pen](https://codepen.io/jkantner/pen/xxXmVKw) for the fixed color picker (Copyright included in the corresponding file)
 - [This pen](https://codepen.io/rakujira/pen/WZOeNq) for integrating `iro.js` into the GUI (Copyright included in the corresponding file)
 - [This pen](https://codepen.io/jkantner/pen/XEzWGr) for the on-off toggles for the alarms (Copyright included in the corresponding file)
+- [This pen](https://codepen.io/milanraring/pen/KKwRBQp) for the big on-off toggle (Copyright included in the corresponding file)
 - [Mono icons](https://icons.mono.company) for some icons ([MIT License](https://github.com/mono-company/mono-icons/blob/master/LICENSE.md))
 
 and draws inspiration from [the `iro.js` website](https://github.com/jaames/iro.js) for the overall layout of the GUI.
