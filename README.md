@@ -10,9 +10,9 @@ Simultaneously, I used it to try out some things that I haven't worked with befo
 - Allows to control either RGB or RGBWW strips.
 - Provides a restful API
 - GUI available
-  <details> <summary>Click to view demo</summary>
+  <details> <summary>Click to view preview</summary>
 
-  ![Demo](https://github.com/Bibo-Joshi/led-strip-controller/edit/demo/demo.gif)
+  ![Demo](https://github.com/Bibo-Joshi/led-strip-controller/blob/main/demo.gif)
 
   </details>
 
