@@ -12,7 +12,7 @@ Simultaneously, I used it to try out some things that I haven't worked with befo
 - GUI available
   <details> <summary>Click to view demo</summary>
 
-  ![Demo](demo.mp4)
+  ![Demo](https://github.com/Bibo-Joshi/led-strip-controller/edit/demo/demo.gif)
 
   </details>
 
