@@ -3,8 +3,9 @@ import datetime
 import logging
 import time
 import zoneinfo
+from collections.abc import Coroutine
 from types import MappingProxyType
-from typing import Any, Coroutine, Literal
+from typing import Any, Literal
 
 import uvicorn
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
