@@ -7,7 +7,7 @@ const activeToggleEventListener = function () {
         uid: this.id.toString().slice(0, -7),
         editedAlarm: { active: this.checked },
       },
-    })
+    }),
   );
 };
 
@@ -26,7 +26,7 @@ const addDayToggleEventListeners = function (dayToggles, uid) {
             uid: uid,
             editedAlarm: { weekdays: activeDays },
           },
-        })
+        }),
       );
     });
   });
