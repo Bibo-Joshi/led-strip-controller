@@ -66,7 +66,7 @@ for (const radio of radioButtons) {
     // I'm in no mood to learn how to build that and this solution is better than having
     // to adjust the html each time the colors are updated
     const match = rgbRegex.exec(
-      window.getComputedStyle(radio).getPropertyValue("color")
+      window.getComputedStyle(radio).getPropertyValue("color"),
     );
     if (match !== null) {
       RGBPicker.color.red = parseInt(match[1]);
@@ -82,7 +82,7 @@ for (const radio of radioButtons) {
             green: RGBPicker.color.green,
             blue: RGBPicker.color.blue,
           },
-        })
+        }),
       );
     }
   };
@@ -170,7 +170,7 @@ RGBPicker.on("input:change", function (color) {
         green: color.green,
         blue: color.blue,
       },
-    })
+    }),
   );
   uncheckStaticPicker();
 });
@@ -180,7 +180,7 @@ WWPicker.on("input:change", function (color) {
     return;
   }
   WSocket.send(
-    JSON.stringify({ updateWhite: Math.round((color.value * 255) / 100) })
+    JSON.stringify({ updateWhite: Math.round((color.value * 255) / 100) }),
   );
   uncheckStaticPicker();
 });
