@@ -16,6 +16,7 @@ disallow_untyped_defs = true
 disallow_incomplete_defs = true
 disallow_untyped_decorators = true
 show_error_codes = true
+implicit_optional = true
 
 [tool.pydantic-mypy]
 init_forbid_extra = true
