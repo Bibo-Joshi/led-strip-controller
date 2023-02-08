@@ -267,10 +267,10 @@ class Controller:
                 job.remove()
             return
 
-        kwargs = dict(
-            kwargs=dict(effect=alarm.effect, scale=1),
-            name=uid,
-        )
+        kwargs = {
+            "kwargs": {"effect": alarm.effect, "scale": 1},
+            "name": uid,
+        }
 
         if alarm.weekdays:
             kwargs["trigger"] = CronTrigger(
