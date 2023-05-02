@@ -36,7 +36,9 @@
   );
   filter: blur(20px);
   opacity: 0;
-  transition: opacity 1s ease, transform 1s ease;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
   transform: perspective(1px) translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -81,7 +83,9 @@
 .power-switch .button .power-on .circle {
   opacity: 1;
   stroke-dashoffset: 220;
-  transition: transform 0s ease, stroke-dashoffset 1s ease 0s;
+  transition:
+    transform 0s ease,
+    stroke-dashoffset 1s ease 0s;
 }
 
 .power-switch input {
@@ -98,7 +102,9 @@
   transform: scale(2) perspective(1px) translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
 .power-switch input:checked + .button .power-on,
@@ -127,7 +133,9 @@
 .power-switch input:checked + .button .power-on .circle {
   transform: rotate(302deg);
   stroke-dashoffset: 40;
-  transition: transform 0.4s ease 0.2s, stroke-dashoffset 0.4s ease 0.2s;
+  transition:
+    transform 0.4s ease 0.2s,
+    stroke-dashoffset 0.4s ease 0.2s;
 }
 
 @-webkit-keyframes line-animation {
