@@ -12,13 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Initialize submodules
-        run:
-          git submodule update --init --recursive
+        run: git submodule update --init --recursive
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version: "3.8"
 
       - name: Install dependencies
         run: |
