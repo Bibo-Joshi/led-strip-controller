@@ -31,6 +31,8 @@ body {
 @media (min-width: 64em) {
   .Control {
     flex-direction: row;
+    align-items: normal;
+    width: 100%;
   }
 }
 
