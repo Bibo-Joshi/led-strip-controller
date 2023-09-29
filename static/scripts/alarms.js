@@ -105,7 +105,6 @@ for (const alarm of alarms) {
   // Time pickers
   for (const picker_suffix of ["start", "end", "off"]) {
     let time = document.getElementById(alarm.id + "-" + picker_suffix).value;
-    // let time = document.getElementById(alarm.id + "-" + picker_suffix).textContent;
     let hour = parseInt(time.slice(0, 2));
     let minute = parseInt(time.slice(3, 5));
     addTimePicker(alarm.id, hour, minute, picker_suffix);

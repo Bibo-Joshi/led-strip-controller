@@ -92,19 +92,27 @@ addAlarm = function (alarm) {
 
   const alarm_times = document.createElement("div");
   alarm_times.className = "Alarm__times";
+  new_alarm.appendChild(alarm_times);
   const map = new Map();
   timesMap.forEach((icon, key) => {
     const time_div = document.createElement("div");
     time_div.className = "Alarm__" + key;
     const i = document.createElement("i");
     i.className = icon;
-    const span = document.createElement("span");
-    span.className = "no-select";
-    span.id = alarmID + "-" + key;
-    span.textContent = formatTime(alarm.effect[key]);
+
+    const input = document.createElement("input");
+    input.className = "no-select, TimePicker";
+    input.value = formatTime(alarm.effect[key]);
+    input.id = alarmID + "-" + key;
+    input.readOnly = true;
+    let hour = parseInt(alarm.effect[key].split(":")[0]);
+    let minute = parseInt(alarm.effect[key].split(":")[1]);
+
     time_div.appendChild(i);
-    time_div.appendChild(span);
+    time_div.appendChild(input);
     alarm_times.appendChild(time_div);
+
+    addTimePicker(alarmID, hour, minute, key);
   });
 
   const delete_div = document.createElement("div");
@@ -120,8 +128,6 @@ addAlarm = function (alarm) {
   delete_button.appendChild(delete_icon);
   delete_div.appendChild(delete_button);
   alarm_times.appendChild(delete_div);
-
-  new_alarm.appendChild(alarm_times);
 
   const next_row = document.createElement("div");
   next_row.className = "Alarm__second_row";

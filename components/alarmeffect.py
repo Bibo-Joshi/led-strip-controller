@@ -9,18 +9,18 @@ from components.colors import Color
 
 
 class InputAlarmEffect(BaseModel):
-    start: dtm.time | None = None
-    end: dtm.time | None = None
-    off: dtm.time | None = None
+    start: dtm.time | None = Field(default=None, example="06:00")
+    end: dtm.time | None = Field(default=None, example="07:00")
+    off: dtm.time | None = Field(default=None, example="08:00")
     timezone: str | None = None
     start_value: int | None = Field(default=None, ge=0, le=255)
     end_value: int | None = Field(default=None, ge=0, le=255)
 
 
 class AlarmEffect(BaseModel, BaseEffect):
-    start: dtm.time
-    end: dtm.time
-    off: dtm.time
+    start: dtm.time = Field(example="06:00")
+    end: dtm.time = Field(example="07:00")
+    off: dtm.time = Field(example="08:00")
     timezone: str = "Europe/Berlin"
     start_value: int = Field(default=0, ge=0, le=255)
     end_value: int = Field(default=255, ge=0, le=255)
