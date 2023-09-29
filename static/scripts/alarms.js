@@ -40,6 +40,10 @@ const addDeleteButtonEventListener = function (deleteButton, uid) {
   });
 };
 
+const addNewAlarmEventListener = function () {
+  WSocket.send(JSON.stringify({ addNewAlarm: true }));
+};
+
 const addTimePicker = function (uid, hour, minute, type) {
   let element_id = uid + "-" + type;
   let picker = new AirDatepicker("#" + element_id, {

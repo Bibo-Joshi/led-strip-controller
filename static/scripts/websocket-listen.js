@@ -81,7 +81,7 @@ addAlarm = function (alarm) {
   toggle.type = "checkbox";
   toggle.className = "active-checkbox";
   toggle.id = alarmID + "-active";
-  toggle.checked = true;
+  toggle.checked = alarm.active;
   toggle.addEventListener("click", activeToggleEventListener);
   const new_alarm = document.createElement("div");
   new_alarm.className = "Alarm";

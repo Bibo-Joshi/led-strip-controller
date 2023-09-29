@@ -1,3 +1,4 @@
+import datetime as dtm
 import logging
 from http import HTTPStatus
 from typing import TYPE_CHECKING, Literal
@@ -7,6 +8,7 @@ from pydantic import ValidationError
 from starlette.websockets import WebSocket, WebSocketDisconnect
 
 from components.alarm import Alarm, EditAlarm, InputAlarm
+from components.alarmeffect import AlarmEffect
 from components.colors import Color, RGBColor
 
 if TYPE_CHECKING:
@@ -104,6 +106,14 @@ def setup_api(controller: "Controller") -> None:
                     )
                 elif (delete_alarm_uid := json_data.get("deleteAlarm")) is not None:
                     await controller.delete_alarm(delete_alarm_uid, from_websocket=websocket)
+                elif (json_data.get("addNewAlarm")) is not None:
+                    alarm = Alarm(
+                        effect=AlarmEffect(
+                            start=dtm.time(6, 0), end=dtm.time(7, 0), off=dtm.time(8, 0)
+                        ),
+                        active=False,
+                    )
+                    await controller.add_alarm(alarm)
 
         except WebSocketDisconnect:
             controller.websocket_manager.disconnect(websocket)

@@ -213,3 +213,23 @@
   --adp-time-track-color: #9fa7b4;
   --adp-time-track-color-hover: #9fa7b4;
 }
+
+.Add__Alarm {
+  font-size: xxx-large;
+  border-radius: 100%;
+  cursor: pointer;
+  background-color: hsl(286, 60%, 50%);
+  max-width: 1em;
+  aspect-ratio: 1/1;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.Add__Alarm [class^="mi-"] {
+  color: #fff;
+  margin: 0;
+}
