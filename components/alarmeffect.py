@@ -8,6 +8,15 @@ from components.baseeffect import BaseEffect
 from components.colors import Color
 
 
+class InputAlarmEffect(BaseModel):
+    start: dtm.time | None = None
+    end: dtm.time | None = None
+    off: dtm.time | None = None
+    timezone: str | None = None
+    start_value: int | None = Field(default=None, ge=0, le=255)
+    end_value: int | None = Field(default=None, ge=0, le=255)
+
+
 class AlarmEffect(BaseModel, BaseEffect):
     start: dtm.time
     end: dtm.time

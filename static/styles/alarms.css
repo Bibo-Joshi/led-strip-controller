@@ -51,6 +51,10 @@
   align-items: center;
 }
 
+[class^="Alarm__"] {
+  display: inherit;
+}
+
 .Alarm__start [class^="mi-"] {
   color: rgb(253, 234, 123);
 }
@@ -172,4 +176,40 @@
     width: 35px;
     height: 35px;
   }
+}
+
+.TimePicker {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: inherit;
+    padding: inherit;
+    border: inherit;
+    outline: inherit;
+    background-color: inherit;
+    color: inherit;
+    text-align: inherit;
+    display: inherit;
+    width: 5ex;
+}
+
+[class^="air-datepicker"] {
+    font-family: inherit;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.air-datepicker {
+    --adp-padding: 10px;
+    --adp-background-color: #1e1f31;
+    --adp-color: #fff;
+    --adp-color-secondary: #9fa7b4;
+    --adp-accent-color: hsl(286, 60%, 50%);
+    --adp-border-color-inner: none;
+    --adp-background-color-hover: #1e1f31;
+    --adp-btn-background-color-hover: var(--adp-background-color-hover);
+    --adp-btn-background-color-active: var(--adp-background-color-hover);
+    --adp-time-track-color: #9fa7b4;
+    --adp-time-track-color-hover: #9fa7b4;
 }

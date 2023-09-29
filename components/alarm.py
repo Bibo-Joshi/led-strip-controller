@@ -8,11 +8,13 @@ from pydantic import (  # pylint: disable=no-name-in-module
     conset,
 )
 
-from components.alarmeffect import AlarmEffect
+from components.alarmeffect import AlarmEffect, InputAlarmEffect
 
 
 def _build_uuid_string() -> str:
-    return uuid.uuid4().hex
+    # Prefix with UUID_ to avoid leading numbers
+    # as those might be problematic in JavaScript
+    return f"UUID_{uuid.uuid4().hex}"
 
 
 class InputAlarm(BaseModel):
@@ -30,7 +32,7 @@ class InputAlarm(BaseModel):
 
 
 class EditAlarm(BaseModel):
-    effect: None | AlarmEffect = None
+    effect: None | InputAlarmEffect = None
     active: bool | None = None
     weekdays: conset(conint(ge=0, le=6), max_length=7) | None = None  # type: ignore[valid-type]
 
@@ -44,7 +46,8 @@ class Alarm(InputAlarm):
 
     def edit(self, edited_alarm: EditAlarm) -> Literal[True]:
         if edited_alarm.effect is not None:
-            self.effect = edited_alarm.effect
+            for attr in edited_alarm.effect.model_fields_set:
+                setattr(self.effect, attr, getattr(edited_alarm.effect, attr))
         if edited_alarm.active is not None:
             self.active = edited_alarm.active
         if edited_alarm.weekdays is not None:

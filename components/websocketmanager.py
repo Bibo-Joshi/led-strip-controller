@@ -23,17 +23,17 @@ class WebSocketManager:
         return await self.broadcast_json({"updateWhite": white}, exclude=exclude)
 
     async def broadcast_rgb(self, rgb_color: RGBColor, exclude: WebSocket = None) -> None:
-        return await self.broadcast_json({"updateRGB": rgb_color.dict()}, exclude=exclude)
+        return await self.broadcast_json({"updateRGB": rgb_color.model_dump()}, exclude=exclude)
 
     async def broadcast_color(self, color: Color, exclude: WebSocket = None) -> None:
-        return await self.broadcast_json({"updateColor": color.dict()}, exclude=exclude)
+        return await self.broadcast_json({"updateColor": color.model_dump()}, exclude=exclude)
 
     async def broadcast_status(self, status: bool, exclude: WebSocket = None) -> None:
         return await self.broadcast_json({"updateStatus": status}, exclude=exclude)
 
     async def broadcast_alarm(self, alarm: Alarm, exclude: WebSocket = None) -> None:
         # Need .json() instead of .dict() due to datetime objects
-        return await self.broadcast_json({"setAlarm": alarm.json()}, exclude=exclude)
+        return await self.broadcast_json({"setAlarm": alarm.model_dump_json()}, exclude=exclude)
 
     async def broadcast_delete_alarm(self, uid: str, exclude: WebSocket = None) -> None:
         return await self.broadcast_json({"deleteAlarm": uid}, exclude=exclude)

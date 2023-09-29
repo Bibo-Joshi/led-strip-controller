@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link href="{{ url_for('static', path='/styles/normalize.min.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', path='/styles/style.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', path='/scripts/air-datepicker/air-datepicker.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', path='/styles/alarms.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', path='/styles/lightbulbtoggle.css') }}" rel="stylesheet"/>
     <link href="{{ url_for('static', path='/styles/onoffswtich.css') }}" rel="stylesheet"/>
@@ -219,18 +220,18 @@
                 <div class="Alarm__times">
                     <div class="Alarm__start">
                         <i class="mi-sunrise-1"></i>
-                        <span class="no-select"
-                              id="{{ alarm.uid }}-start">{{ alarm.effect.start|time_format }}</span>
+                        <input class="no-select, TimePicker" readonly value="{{ alarm.effect.start|time_format }}"
+                              id="{{ alarm.uid }}-start">
                     </div>
                     <div class="Alarm__end">
                         <i class="mi-sun"></i>
-                        <span class="no-select"
-                              id="{{ alarm.uid }}-end">{{ alarm.effect.end|time_format }}</span>
+                        <input class="no-select, TimePicker" readonly value="{{ alarm.effect.end|time_format }}"
+                              id="{{ alarm.uid }}-end">
                     </div>
                     <div class="Alarm__off">
                         <i class="mi-sunset"></i>
-                        <span class="no-select"
-                              id="{{ alarm.uid }}-off">{{ alarm.effect.off|time_format }}</span>
+                        <input class="no-select, TimePicker" readonly value="{{ alarm.effect.off|time_format }}"
+                              id="{{ alarm.uid }}-off">
                     </div>
                     <div class="Alarm__delete">
                         <button class="Alarm__delete__button" id="{{ alarm.uid }}-delete">
@@ -256,6 +257,8 @@
     </div>
 </div>
 </body>
+<script src="{{ url_for('static', path='./scripts/air-datepicker/air-datepicker.js') }}"></script>
+<script src="{{ url_for('static', path='./scripts/air-datepicker/locale/de.js') }}"></script>
 <script src="{{ url_for('static', path='./scripts/iro.min.js') }}"></script>
 <script src="{{ url_for('static', path='./scripts/commons.js') }}"></script>
 <script src="{{ url_for('static', path='./scripts/script.js') }}"></script>
