@@ -3,7 +3,7 @@ import datetime
 import logging
 import time
 import zoneinfo
-from collections.abc import Coroutine
+from collections.abc import Collection, Coroutine
 from types import MappingProxyType
 from typing import Any, Literal
 
@@ -31,7 +31,7 @@ from components.websocketmanager import WebSocketManager
 _logger = logging.getLogger(__name__)
 
 
-def _map_weekdays(ids: list[int]) -> str:
+def _map_weekdays(ids: Collection[int]) -> str:
     mapping = {0: "sun", 1: "mon", 2: "tue", 3: "wed", 4: "thu", 5: "fri", 6: "sat", 7: "sun"}
     return ",".join(mapping[id_] for id_ in ids)
 
@@ -310,10 +310,7 @@ class Controller:
             kwargs["id"] = uid
             self.scheduler.add_job(func=func, **kwargs)
 
-    def delete_alarm(
-        self,
-        uid: str,
-    ) -> Literal[True]:
+    async def delete_alarm(self, uid: str, from_websocket: WebSocket = None) -> Literal[True]:
         try:
             alarm = self._alarms.pop(uid)
         except KeyError as exc:
@@ -324,6 +321,8 @@ class Controller:
 
         if self.persistence:
             self.create_task(self.persistence.drop_alarm(alarm))
+
+        await self.websocket_manager.broadcast_delete_alarm(uid, exclude=from_websocket)
 
         return True
 

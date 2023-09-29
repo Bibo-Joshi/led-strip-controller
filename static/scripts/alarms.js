@@ -32,6 +32,12 @@ const addDayToggleEventListeners = function (dayToggles, uid) {
   });
 };
 
+const addDeleteButtonEventListener = function (deleteButton, uid) {
+  deleteButton.addEventListener("click", function () {
+    deleteAlarmEventListener(uid);
+  });
+};
+
 for (const alarm of alarms) {
   // On-Off toggle
   const activeToggle = document.getElementById(alarm.id + "-active");
@@ -43,4 +49,8 @@ for (const alarm of alarms) {
     dayToggles.set(day, document.getElementById(alarm.id + "-" + day));
   }
   addDayToggleEventListeners(dayToggles, alarm.id);
+
+  // Delete button
+  const deleteButton = document.getElementById(alarm.id + "-delete");
+  addDeleteButtonEventListener(deleteButton, alarm.id);
 }

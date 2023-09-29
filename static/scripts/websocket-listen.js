@@ -56,7 +56,17 @@ WSocket.onmessage = function (event) {
     } else {
       addAlarm(setAlarm);
     }
+  } else if (jsonData.deleteAlarm !== undefined) {
+    deleteAlarm(jsonData.deleteAlarm);
   }
+};
+
+deleteAlarm = function (alarmID) {
+  const alarmElement = document.getElementById(alarmID);
+  if (!exists(alarmElement)) {
+    return;
+  }
+  alarmElement.remove();
 };
 
 addAlarm = function (alarm) {
@@ -91,6 +101,21 @@ addAlarm = function (alarm) {
     time_div.appendChild(span);
     alarm_times.appendChild(time_div);
   });
+
+  const delete_div = document.createElement("div");
+  delete_div.className = "Alarm__delete";
+  const delete_button = document.createElement("button");
+  delete_button.className = "Alarm__delete__button";
+  delete_button.id = alarmID + "-delete";
+  delete_button.addEventListener("click", function () {
+    deleteAlarmEventListener(alarmID);
+  });
+  const delete_icon = document.createElement("i");
+  delete_icon.className = "mi-delete";
+  delete_button.appendChild(delete_icon);
+  delete_div.appendChild(delete_button);
+  alarm_times.appendChild(delete_div);
+
   new_alarm.appendChild(alarm_times);
 
   const next_row = document.createElement("div");

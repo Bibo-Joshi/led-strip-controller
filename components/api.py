@@ -45,7 +45,7 @@ def setup_api(controller: "Controller") -> None:
     @controller.fast_api.post("/api/deleteAlarm", response_model=bool)
     async def delete_alarm(uid: str) -> Literal[True]:
         try:
-            return controller.delete_alarm(uid)
+            return await controller.delete_alarm(uid)
         except ValueError as exc:
             raise HTTPException(
                 status_code=HTTPStatus.NOT_FOUND, detail="Alarm not found."
@@ -102,6 +102,8 @@ def setup_api(controller: "Controller") -> None:
                     await controller.edit_alarm(
                         uid=uid, edited_alarm=edited_alarm, from_websocket=websocket
                     )
+                elif (delete_alarm_uid := json_data.get("deleteAlarm")) is not None:
+                    await controller.delete_alarm(delete_alarm_uid, from_websocket=websocket)
 
         except WebSocketDisconnect:
             controller.websocket_manager.disconnect(websocket)

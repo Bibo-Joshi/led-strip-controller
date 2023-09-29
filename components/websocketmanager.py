@@ -35,6 +35,9 @@ class WebSocketManager:
         # Need .json() instead of .dict() due to datetime objects
         return await self.broadcast_json({"setAlarm": alarm.json()}, exclude=exclude)
 
+    async def broadcast_delete_alarm(self, uid: str, exclude: WebSocket = None) -> None:
+        return await self.broadcast_json({"deleteAlarm": uid}, exclude=exclude)
+
     async def broadcast_json(self, json: Any, exclude: WebSocket = None) -> None:
         async with self._lock:
             await asyncio.gather(

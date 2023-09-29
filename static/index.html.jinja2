@@ -232,6 +232,11 @@
                         <span class="no-select"
                               id="{{ alarm.uid }}-off">{{ alarm.effect.off|time_format }}</span>
                     </div>
+                    <div class="Alarm__delete">
+                        <button class="Alarm__delete__button" id="{{ alarm.uid }}-delete">
+                            <i class="mi-delete"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="Alarm__second_row">
                     <div class="Alarm__weekdays">
