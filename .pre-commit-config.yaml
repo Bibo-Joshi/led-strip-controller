@@ -27,7 +27,7 @@ repos:
         additional_dependencies:
           - fastapi~=0.103.2
           - uvicorn[standard]~=0.23.2
-          - APScheduler~=3.10.1
+          - APScheduler~=3.10.4
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.5.1
     hooks:
@@ -35,7 +35,7 @@ repos:
         additional_dependencies:
           - fastapi~=0.103.2
           - uvicorn[standard]~=0.23.2
-          - APScheduler~=3.10.1
+          - APScheduler~=3.10.4
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.10.1
     hooks:
