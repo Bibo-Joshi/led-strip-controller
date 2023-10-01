@@ -37,7 +37,7 @@ repos:
           - uvicorn[standard]~=0.23.2
           - APScheduler~=3.10.4
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.10.4
+    rev: v3.10.1
     hooks:
       - id: pyupgrade
         args:
