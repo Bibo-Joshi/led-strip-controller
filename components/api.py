@@ -92,6 +92,7 @@ def setup_api(controller: "Controller") -> None:
                 elif (edit_alarm_data := json_data.get("editAlarm")) is not None:
                     uid = edit_alarm_data.get("uid")
                     edited_alarm_data = edit_alarm_data.get("editedAlarm", {})
+                    _logger.info("Editing alarm `%s` with data `%s`", uid, edited_alarm_data)
                     try:
                         edited_alarm = EditAlarm(**edited_alarm_data)
                     except ValidationError:
