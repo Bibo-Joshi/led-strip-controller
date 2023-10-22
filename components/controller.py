@@ -335,7 +335,6 @@ class Controller:
             raise ValueError("No alarm with this uid known.") from exc
 
         alarm.edit(edited_alarm)
-        _logger.info("Edited alarm %s", alarm.model_dump_json())
         self._schedule_alarm(uid)
 
         if self.persistence:
