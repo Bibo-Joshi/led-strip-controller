@@ -33,6 +33,10 @@ class AlarmEffect(BaseModel, BaseEffect):
     def __init__(self, **data: Any):
         super().__init__(**data)
 
+        import logging
+
+        logging.getLogger(__name__).debug(data)
+
         today = dtm.date.today()
         tzinfo = zoneinfo.ZoneInfo(self.timezone)
 
