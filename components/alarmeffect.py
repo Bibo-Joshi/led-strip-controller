@@ -54,7 +54,7 @@ class AlarmEffect(BaseModel, BaseEffect):
     def edit(self, effect: InputAlarmEffect = None, **kwargs: Any) -> None:
         if not isinstance(effect, InputAlarmEffect):
             raise TypeError("Can only edit AlarmEffect")
-        self.__init__(  # pylint: disable=unnecessary-dunder-call  # type: ignore[misc]
+        self.__init__(  # type: ignore[misc]  # pylint: disable=unnecessary-dunder-call
             start=effect.start or self.start,
             end=effect.end or self.end,
             off=effect.off or self.off,
