@@ -52,7 +52,7 @@ class AlarmEffect(BaseModel, BaseEffect):
         self._value_diff = self.end_value - self.start_value
 
     def edit(self, effect: InputAlarmEffect = None, **kwargs: Any) -> None:
-        if not isinstance(effect, AlarmEffect):
+        if not isinstance(effect, InputAlarmEffect):
             raise TypeError("Can only edit AlarmEffect")
         self.__class__(
             start=effect.start or self.start,
