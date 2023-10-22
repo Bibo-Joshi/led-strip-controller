@@ -68,6 +68,7 @@ def setup_api(controller: "Controller") -> None:
         try:
             while True:
                 json_data = await websocket.receive_json()
+                _logger.info("Websocket received data `%s`", json_data)
                 if rgb_data := json_data.get("updateRGB"):
                     try:
                         new_rgb = RGBColor(**rgb_data)
