@@ -1,4 +1,5 @@
 import abc
+from typing import Any
 
 from components.colors import Color
 
@@ -22,4 +23,8 @@ class BaseEffect(abc.ABC):
     @property
     @abc.abstractmethod
     def stay_on(self) -> bool:
+        ...
+
+    @abc.abstractmethod
+    def edit(self, **kwargs: Any) -> None:
         ...

@@ -46,8 +46,7 @@ class Alarm(InputAlarm):
 
     def edit(self, edited_alarm: EditAlarm) -> Literal[True]:
         if edited_alarm.effect is not None:
-            for attr in edited_alarm.effect.model_fields_set:
-                setattr(self.effect, attr, getattr(edited_alarm.effect, attr))
+            self.effect.edit(edited_alarm.effect)
         if edited_alarm.active is not None:
             self.active = edited_alarm.active
         if edited_alarm.weekdays is not None:

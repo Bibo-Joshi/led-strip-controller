@@ -39,13 +39,29 @@ class AlarmEffect(BaseModel, BaseEffect):
         dtm_start = dtm.datetime.combine(today, self.start, tzinfo)
         dtm_end = dtm.datetime.combine(today, self.end, tzinfo)
         dtm_off = dtm.datetime.combine(today, self.off, tzinfo)
-        if dtm_end <= dtm_start or dtm_off <= dtm_end:
-            raise ValueError("Ordering of times is invalid!")
+
+        if dtm_end <= dtm_start:
+            dtm_end += dtm.timedelta(days=1)
+
+        if dtm_off <= dtm_end:
+            dtm_off += dtm.timedelta(days=1)
 
         self._start_end = (dtm_end - dtm_start).seconds
         self._end_off = (dtm_off - dtm_end).seconds
         self._start_off = self._start_end + self._end_off
         self._value_diff = self.end_value - self.start_value
+
+    def edit(self, effect: InputAlarmEffect = None, **kwargs: Any) -> None:
+        if not isinstance(effect, InputAlarmEffect):
+            raise TypeError("Can only edit AlarmEffect")
+        self.__init__(  # type: ignore[misc]  # pylint: disable=unnecessary-dunder-call
+            start=effect.start or self.start,
+            end=effect.end or self.end,
+            off=effect.off or self.off,
+            timezone=effect.timezone or self.timezone,
+            start_value=effect.start_value or self.start_value,
+            end_value=effect.end_value or self.end_value,
+        )
 
     @property
     def duration(self) -> float:
