@@ -33,10 +33,6 @@ class AlarmEffect(BaseModel, BaseEffect):
     def __init__(self, **data: Any):
         super().__init__(**data)
 
-        import logging
-
-        logging.getLogger(__name__).debug(data)
-
         today = dtm.date.today()
         tzinfo = zoneinfo.ZoneInfo(self.timezone)
 
@@ -58,7 +54,7 @@ class AlarmEffect(BaseModel, BaseEffect):
     def edit(self, effect: InputAlarmEffect = None, **kwargs: Any) -> None:
         if not isinstance(effect, InputAlarmEffect):
             raise TypeError("Can only edit AlarmEffect")
-        self.__class__(
+        self.__init__(  # pylint: disable=unnecessary-dunder-call  # type: ignore[misc]
             start=effect.start or self.start,
             end=effect.end or self.end,
             off=effect.off or self.off,
