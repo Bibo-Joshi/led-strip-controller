@@ -4,6 +4,6 @@
     "prettier": "2.5.1"
   },
   "dependencies": {
-    "air-datepicker": "^3.4.0"
+    "air-datepicker": "^3.5.0"
   }
 }

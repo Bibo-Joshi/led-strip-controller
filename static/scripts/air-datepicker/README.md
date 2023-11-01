@@ -38,7 +38,7 @@ new AirDatepicker('#el' [, options]);
 - recreate global container if it was removed from DOM [#516](https://github.com/t1m0n/air-datepicker/issues/516)
 - added Greek locale, thanks to [sonole](https://github.com/sonole), in [#515](https://github.com/t1m0n/air-datepicker/pull/515)
 
-### v3.4.0
+### v3.5.0
 
 - fixed time format in timepicker body [#512](https://github.com/t1m0n/air-datepicker/issues/512)
 
