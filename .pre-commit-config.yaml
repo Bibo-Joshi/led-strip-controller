@@ -9,7 +9,7 @@ default_language_version:
 
 repos:
   - repo: https://github.com/psf/black
-    rev: 23.10.1
+    rev: 23.11.0
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/flake8
@@ -29,7 +29,7 @@ repos:
           - uvicorn[standard]~=0.24.0
           - APScheduler~=3.10.4
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.6.1
+    rev: v1.7.1
     hooks:
       - id: mypy
         additional_dependencies:
@@ -48,6 +48,6 @@ repos:
       - id: isort
         name: isort
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
+    rev: v4.0.0-alpha.3
     hooks:
       - id: prettier
