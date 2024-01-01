@@ -2561,7 +2561,7 @@
     var K;
     return (
       I(B, "defaults", s),
-      I(B, "version", "3.5.0"),
+      I(B, "version", "3.6.0"),
       I(B, "defaultGlobalContainerId", "air-datepicker-global-container"),
       (K = B.prototype),
       Object.assign(K, N),
