@@ -2,10 +2,10 @@
   "object" == typeof exports && "object" == typeof module
     ? (module.exports = t())
     : "function" == typeof define && define.amd
-    ? define([], t)
-    : "object" == typeof exports
-    ? (exports.AirDatepicker = t())
-    : (e.AirDatepicker = t());
+      ? define([], t)
+      : "object" == typeof exports
+        ? (exports.AirDatepicker = t())
+        : (e.AirDatepicker = t());
 })(this, function () {
   return (function () {
     "use strict";
@@ -1897,9 +1897,9 @@
               !t.buttons && a
                 ? r._addButtons()
                 : t.buttons && !a
-                ? (r.buttons.destroy(),
-                  r.$buttons.parentNode.removeChild(r.$buttons))
-                : l && t.buttons && a && r.buttons.clearHtml().render(),
+                  ? (r.buttons.destroy(),
+                    r.$buttons.parentNode.removeChild(r.$buttons))
+                  : l && t.buttons && a && r.buttons.clearHtml().render(),
               !t.isMobile && o
                 ? (r.treatAsInline || j || r._createMobileOverlay(),
                   r._addMobileAttributes(),
