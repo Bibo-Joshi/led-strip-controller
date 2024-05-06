@@ -1,8 +1,8 @@
 # Make sure that
 #   * the additional_dependencies here match requirements.txt
 
-ci:
-  autoupdate_schedule: monthly
+#ci:
+#  autoupdate_schedule: monthly
 
 default_language_version:
   python: python3.10
