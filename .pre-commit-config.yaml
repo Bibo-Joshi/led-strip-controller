@@ -22,7 +22,7 @@ repos:
           - --jobs=0 # See https://pylint.pycqa.org/en/latest/user_guide/run.html?#parallel-execution to know more
         additional_dependencies:
           - fastapi~=0.109.1
-          - uvicorn[standard]~=0.29.0
+          - uvicorn[standard]~=0.30.0
           - APScheduler~=3.10.4
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.9.0
@@ -30,7 +30,7 @@ repos:
       - id: mypy
         additional_dependencies:
           - fastapi~=0.109.1
-          - uvicorn[standard]~=0.29.0
+          - uvicorn[standard]~=0.30.0
           - APScheduler~=3.10.4
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.15.2
